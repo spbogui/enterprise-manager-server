@@ -22,12 +22,16 @@ public class Activity extends BaseEntity {
     @JoinColumn(name = "activity_type_id", nullable = false)
     private ActivityType activityType;
     @NonNull
+    @Temporal(TemporalType.DATE)
     @Column(nullable = false)
     private Date startDate;
+    @Temporal(TemporalType.DATE)
     private Date endDate;
     @NonNull
     @Column(nullable = false)
+    @Temporal(TemporalType.TIME)
     private Date startTime;
+    @Temporal(TemporalType.TIME)
     private Date endTime;
     @NonNull
     @Column(nullable = false)

@@ -7,4 +7,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface ActivityReportRepository extends JpaRepository<ActivityReport, Long> {
+    ActivityReport findByUuid(String uuid);
 }
