@@ -45,7 +45,7 @@ public class ActivityTypeRestServiceResource {
      * @param id
      * @return Boolean
      */
-    @DeleteMapping("/activityTypes/{id}")
+    @DeleteMapping("/activity-types/{id}")
     public Boolean remove(@PathVariable Long id) {
         Optional<ActivityType> result = activityTypeRepository.findById(id);
 
