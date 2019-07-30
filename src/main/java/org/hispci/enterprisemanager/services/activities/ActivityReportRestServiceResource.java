@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/activity-reports")
+@CrossOrigin("*")
 public class ActivityReportRestServiceResource {
     private final ActivityReportRepository activityReportRepository;
 
@@ -25,8 +26,8 @@ public class ActivityReportRestServiceResource {
      * @param activityReport
      * @return Activity
      */
-    @PostMapping("/activity-reports")
-    public ActivityReport save(ActivityReport activityReport) {
+    @PostMapping
+    public ActivityReport save(@RequestBody ActivityReport activityReport) {
         return activityReportRepository.save(activityReport);
     }
 
@@ -35,8 +36,8 @@ public class ActivityReportRestServiceResource {
      * @param activityReport
      * @return Activity
      */
-    @PutMapping("/activity-reports")
-    public ActivityReport update(ActivityReport activityReport) {
+    @PutMapping
+    public ActivityReport update(@RequestBody ActivityReport activityReport) {
         return activityReportRepository.saveAndFlush(activityReport);
     }
 
@@ -45,7 +46,7 @@ public class ActivityReportRestServiceResource {
      * @param id
      * @return Boolean
      */
-    @DeleteMapping("/activity-reports/{id}")
+    @DeleteMapping("/{id}")
     public Boolean remove(@PathVariable Long id) {
         Optional<ActivityReport> result = activityReportRepository.findById(id);
 
@@ -61,7 +62,7 @@ public class ActivityReportRestServiceResource {
      * findAllActivities()
      * @return List<Activity>
      */
-    @GetMapping("/activity-reports")
+    @GetMapping
     public List<ActivityReport> findAll() {
         return activityReportRepository.findAll();
     }
@@ -71,7 +72,7 @@ public class ActivityReportRestServiceResource {
      * @param id
      * @return Activity
      */
-    @GetMapping("/activity-reports/{id}")
+    @GetMapping("/{id}")
     public ActivityReport getOne(@PathVariable Long id){
         return activityReportRepository.findById(id).orElse(null);
     }
@@ -81,7 +82,7 @@ public class ActivityReportRestServiceResource {
      * @param uuid
      * @return Activity
      */
-    @GetMapping("/activity-reports/{uuid}")
+    @GetMapping("/uuid/{uuid}")
     public ActivityReport findByUuid(@PathVariable String uuid) {
         return activityReportRepository.findByUuid(uuid);
     }

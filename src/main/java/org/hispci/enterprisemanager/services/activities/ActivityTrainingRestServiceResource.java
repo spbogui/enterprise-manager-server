@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/activities")
+@RequestMapping("/api/activities/training")
+@CrossOrigin("*")
 public class ActivityTrainingRestServiceResource {
     private final ActivityTrainingRepository activityTrainingRepository;
 
@@ -25,8 +26,8 @@ public class ActivityTrainingRestServiceResource {
      * @param activity
      * @return ActivityTraining
      */
-    @PostMapping("/training")
-    public ActivityTraining save(ActivityTraining activity) {
+    @PostMapping
+    public ActivityTraining save(@RequestBody ActivityTraining activity) {
         return activityTrainingRepository.save(activity);
     }
 
@@ -35,8 +36,8 @@ public class ActivityTrainingRestServiceResource {
      * @param activity
      * @return ActivityTraining
      */
-    @PutMapping("/training")
-    public ActivityTraining update(ActivityTraining activity) {
+    @PutMapping
+    public ActivityTraining update(@RequestBody ActivityTraining activity) {
         return activityTrainingRepository.saveAndFlush(activity);
     }
 
@@ -45,7 +46,7 @@ public class ActivityTrainingRestServiceResource {
      * @param id
      * @return Boolean
      */
-    @DeleteMapping("/training/{id}")
+    @DeleteMapping("/{id}")
     public Boolean remove(@PathVariable Long id) {
         Optional<ActivityTraining> result = activityTrainingRepository.findById(id);
 
@@ -61,7 +62,7 @@ public class ActivityTrainingRestServiceResource {
      * findAll()
      * @return List<ActivityTraining>
      */
-    @GetMapping("/training")
+    @GetMapping
     public List<ActivityTraining> findAll() {
         return activityTrainingRepository.findAll();
     }
@@ -71,7 +72,7 @@ public class ActivityTrainingRestServiceResource {
      * @param id
      * @return ActivityTraining
      */
-    @GetMapping("/training/{id}")
+    @GetMapping("/{id}")
     public ActivityTraining getOne(@PathVariable Long id){
         return activityTrainingRepository.findById(id).orElse(null);
     }
@@ -81,7 +82,7 @@ public class ActivityTrainingRestServiceResource {
      * @param uuid
      * @return ActivityTraining
      */
-    @GetMapping("/training/{uuid}")
+    @GetMapping("/uuid/{uuid}")
     public ActivityTraining findByUuid(@PathVariable String uuid) {
         return activityTrainingRepository.findByUuid(uuid);
     }

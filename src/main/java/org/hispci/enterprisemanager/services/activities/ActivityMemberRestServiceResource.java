@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/activities")
+@CrossOrigin("*")
 public class ActivityMemberRestServiceResource {
     private final ActivityMemberRepository activityRepository;
 
@@ -26,7 +27,7 @@ public class ActivityMemberRestServiceResource {
      * @return ActivityMember
      */
     @PostMapping("/members")
-    public ActivityMember save(ActivityMember activityMember) {
+    public ActivityMember save(@RequestBody ActivityMember activityMember) {
         return activityRepository.save(activityMember);
     }
 
@@ -36,7 +37,7 @@ public class ActivityMemberRestServiceResource {
      * @return ActivityMember
      */
     @PutMapping("/members")
-    public ActivityMember update(ActivityMember activityMember) {
+    public ActivityMember update(@RequestBody ActivityMember activityMember) {
         return activityRepository.saveAndFlush(activityMember);
     }
 

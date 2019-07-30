@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/activities")
+@CrossOrigin("*")
 public class ActivityRestServiceResource {
     private final ActivityRepository activityRepository;
     private final StaffRepository staffRepository;
@@ -33,8 +34,8 @@ public class ActivityRestServiceResource {
      * @param activity
      * @return Activity
      */
-    @PostMapping("/activities")
-    public Activity save(Activity activity) {
+    @PostMapping
+    public Activity save(@RequestBody Activity activity) {
         return activityRepository.save(activity);
     }
 
@@ -43,8 +44,8 @@ public class ActivityRestServiceResource {
      * @param activity
      * @return Activity
      */
-    @PutMapping("/activities")
-    public Activity update(Activity activity) {
+    @PutMapping
+    public Activity update(@RequestBody Activity activity) {
         return activityRepository.saveAndFlush(activity);
     }
 
@@ -53,7 +54,7 @@ public class ActivityRestServiceResource {
      * @param id
      * @return Boolean
      */
-    @DeleteMapping("/activities/{id}")
+    @DeleteMapping("/{id}")
     public Boolean remove(@PathVariable Long id) {
         Optional<Activity> result = activityRepository.findById(id);
 
@@ -69,7 +70,7 @@ public class ActivityRestServiceResource {
      * findAllActivities()
      * @return List<Activity>
      */
-    @GetMapping("/activities")
+    @GetMapping
     public List<Activity> findAll() {
         return activityRepository.findAll();
     }
@@ -79,7 +80,7 @@ public class ActivityRestServiceResource {
      * @param id
      * @return Activity
      */
-    @GetMapping("/activities/{id}")
+    @GetMapping("/{id}")
     public Activity getOne(@PathVariable Long id){
         return activityRepository.findById(id).orElse(null);
     }
@@ -89,7 +90,7 @@ public class ActivityRestServiceResource {
      * @param uuid
      * @return Activity
      */
-    @GetMapping("/activities/{uuid}")
+    @GetMapping("/uuid/{uuid}")
     public Activity findByUuid(@PathVariable String uuid) {
         return activityRepository.findByUuid(uuid);
     }
@@ -100,7 +101,7 @@ public class ActivityRestServiceResource {
      * @param staffId
      * @return Activity
      */
-    @GetMapping("/activities/add-staff/activityId/staffId")
+    @GetMapping("/add-staff/activityId/staffId")
     public Activity addStaffMember(@RequestParam Long activityId, @RequestParam Long staffId) {
         Staff staff = staffRepository.findById(staffId).orElse(null);
         if (staff != null) {
@@ -119,7 +120,7 @@ public class ActivityRestServiceResource {
      * @param activityMemberId
      * @return Activity
      */
-    @GetMapping("/activities/add-member/activityId/activityMemberId")
+    @GetMapping("/add-member/activityId/activityMemberId")
     public Activity addExternalMember(@RequestParam Long activityId, @RequestParam Long activityMemberId) {
         ActivityMember activityMember = activityMemberRepository.findById(activityMemberId).orElse(null);
         if (activityMember != null) {
