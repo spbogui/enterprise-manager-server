@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/activity-types")
 @CrossOrigin("*")
 public class ActivityTypeRestServiceResource {
     private final ActivityTypeRepository activityTypeRepository;
@@ -26,8 +26,8 @@ public class ActivityTypeRestServiceResource {
      * @param activityType
      * @return ActivityType
      */
-    @PostMapping("/activity-types")
-    public ActivityType save(ActivityType activityType) {
+    @PostMapping
+    public ActivityType save(@RequestBody ActivityType activityType) {
         return activityTypeRepository.save(activityType);
     }
 
@@ -36,8 +36,8 @@ public class ActivityTypeRestServiceResource {
      * @param activityType
      * @return ActivityType
      */
-    @PutMapping("/activity-types")
-    public ActivityType update(ActivityType activityType) {
+    @PutMapping
+    public ActivityType update(@RequestBody ActivityType activityType) {
         return activityTypeRepository.saveAndFlush(activityType);
     }
 
@@ -46,7 +46,7 @@ public class ActivityTypeRestServiceResource {
      * @param id
      * @return Boolean
      */
-    @DeleteMapping("/activity-types/{id}")
+    @DeleteMapping("/{id}")
     public Boolean remove(@PathVariable Long id) {
         Optional<ActivityType> result = activityTypeRepository.findById(id);
 
@@ -62,7 +62,7 @@ public class ActivityTypeRestServiceResource {
      * findAll()
      * @return List<Activity>
      */
-    @GetMapping("/activity-types")
+    @GetMapping
     public List<ActivityType> findAll() {
         return activityTypeRepository.findAll();
     }
@@ -72,7 +72,7 @@ public class ActivityTypeRestServiceResource {
      * @param id
      * @return Activity
      */
-    @GetMapping("/activity-types/{id}")
+    @GetMapping("/{id}")
     public ActivityType getOne(@PathVariable Long id){
         return activityTypeRepository.findById(id).orElse(null);
     }
